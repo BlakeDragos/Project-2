@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "exampledb",
+    "database": "JobSiteDB",
     "host": "localhost",
     "dialect": "mysql"
   },
