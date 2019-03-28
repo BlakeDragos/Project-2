@@ -1,7 +1,7 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define(
+  var Employee = sequelize.define(
     "employee",
     {
       id: {
@@ -40,4 +40,8 @@ module.exports = function(sequelize, DataTypes) {
       tableName: "employee"
     }
   );
+  Employee.associate = function(models) {
+    Employee.belongsToMany(models.Skills, { through: Rtable });
+  };
+  return Employee;
 };

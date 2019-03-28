@@ -1,7 +1,7 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define(
+  var Employer = sequelize.define(
     "employer",
     {
       id: {
@@ -34,4 +34,5 @@ module.exports = function(sequelize, DataTypes) {
       tableName: "employer"
     }
   );
+  return Employer;
 };
