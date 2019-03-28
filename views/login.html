@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel = "stylesheet" href = "https://code.jquery.com/jquery-3.3.1.min.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js">
+    <title>Log in </title>
+  </head>
+  <body>
+    <div class="container-fluid">
+  <div class="row no-gutter">
+    <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+    <div class="col-md-8 col-lg-6">
+      <div class="login d-flex align-items-center py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9 col-lg-8 mx-auto">
+              <h3 class="login-heading mb-4">Welcome back!</h3>
+              <form>
+                <div class="form-label-group">
+                  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                  <label for="inputEmail">User Name</label>
+                </div>
+
+                <div class="form-label-group">
+                  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                  <label for="inputPassword">Password</label>
+                </div>
+
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+              <label class="btn btn-secondary active">
+                <input type="radio" name="options" id="option1" onclick = "myfunc()" autocomplete="off" > Employer
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" id="option2" onclick = "myfunc()" autocomplete="off"> Employee
+              </label>
+            </div>
+
+
+                <br>
+                <br>
+                <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>
+                <div class="text-center">
+                  <a class="small"  href = "#" id = "toobad" onclick="window.open('img/bigpic.jpg','_blank')" >Forgot password? Too bad!</a></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".btn-secondary:first").click(function(){
+      $(this).button('toggle');
+    });
+
+
+
+  });
+
+  </script>
+
+
+
+  </body>
+
+</html>
