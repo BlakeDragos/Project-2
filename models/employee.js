@@ -37,11 +37,13 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     {
-      tableName: "employee"
+      tableName: "employee",
+      classMethods: {
+        associate: function(models) {
+          Employee.hasMany(models.Skills, { through: models.Rtable });
+        }
+      }
     }
   );
-  Employee.associate = function(models) {
-    Employee.belongsToMany(models.Skills, { through: Rtable });
-  };
   return Employee;
 };

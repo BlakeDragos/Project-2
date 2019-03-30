@@ -1,5 +1,4 @@
 /* jshint indent: 2 */
-
 module.exports = function(sequelize, DataTypes) {
   var Skills = sequelize.define(
     "skills",
@@ -18,11 +17,13 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     {
-      tableName: "skills"
+      tableName: "skills",
+      classMethods: {
+        associate: function(models) {
+          Skills.belongsTo(models.Employee, { through: models.Rtable });
+        }
+      }
     }
   );
-  Skills.associate = function(models) {
-    Skills.belongsToMany(models.Employee, { through: Rtable });
-  };
   return Skills;
 };

@@ -54,7 +54,9 @@ module.exports = function(app) {
       where: {
         id: req.parms.idEmployee
       }
-    }).then(function(result) {});
+    }).then(function(result) {
+      res.json(result);
+    });
   });
   // Delete an example by id
   // app.delete("/api/examples/:id", function(req, res) {
