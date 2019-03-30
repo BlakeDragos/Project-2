@@ -1,8 +1,8 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define(
-    "rtable",
+  var Rtable = sequelize.define(
+    "Rtable",
     {
       idEmployee: {
         type: DataTypes.INTEGER(11),
@@ -27,4 +27,6 @@ module.exports = function(sequelize, DataTypes) {
       tableName: "rtable"
     }
   );
+
+  return Rtable;
 };

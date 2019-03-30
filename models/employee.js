@@ -1,15 +1,16 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define(
-    "employee",
+  var Employee = sequelize.define(
+    "Employee",
     {
-      id: {
-        type: DataTypes.INTEGER(11),
-        allowNull: false,
-        primaryKey: true,
-        field: "id"
-      },
+      // id: {
+      //   type: DataTypes.INTEGER(11),
+      //   allowNull: false,
+      //   autoIncrement: true,
+      //   primaryKey: true,
+      //   field: "id"
+      // },
       userName: {
         type: DataTypes.STRING(20),
         allowNull: false,
@@ -37,7 +38,13 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     {
-      tableName: "employee"
+      tableName: "employee",
+      classMethods: {
+        associate: function(models) {
+          Employee.hasMany(models.Skills, { through: models.Rtable });
+        }
+      }
     }
   );
+  return Employee;
 };

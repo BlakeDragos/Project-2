@@ -1,15 +1,15 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define(
-    "employer",
+  var Employer = sequelize.define(
+    "Employer",
     {
-      id: {
-        type: DataTypes.INTEGER(11),
-        allowNull: false,
-        primaryKey: true,
-        field: "id"
-      },
+      // id: {
+      //   type: DataTypes.INTEGER(11),
+      //   allowNull: false,
+      //   primaryKey: true,
+      //   field: "id"
+      // },
       userName: {
         type: DataTypes.STRING(20),
         allowNull: false,
@@ -34,4 +34,5 @@ module.exports = function(sequelize, DataTypes) {
       tableName: "employer"
     }
   );
+  return Employer;
 };
