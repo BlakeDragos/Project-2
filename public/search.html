@@ -32,27 +32,13 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">Welcome, </a>
+            <a class="navbar-brand" style = "float:left; position: absolute">Welcome, <div style= "position: relative;float: right"id="result"></div></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Do Something</a>
-                        <!-- Here's the magic. Add the .animate and .slide-in classes to your .dropdown-menu and you're all set! -->
-                        <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Search For Job</a>
-                            <a class="dropdown-item" href="#">Update/View Profile</a>
-                            <!-- <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a> -->
-                        </div>
-                    </li>
-                </ul>
-            </div>
+
         </div>
     </nav>
 
@@ -65,31 +51,48 @@
           <span class="input-group-text purple lighten-3" id="basic-text1"><i class="glyphicon glyphicon-search"
             aria-hidden="true"></i></span>
         </div>
-        <input class="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search" style="position:absolute;width: 80%; height: 50px">
+        <input class="form-control my-0 py-1" type="text" id = "searchitem" placeholder="Search" aria-label="Search" style="position:absolute;width: 80%; height: 50px">
+
       </div>
 
 
       <div class="form-inline dropdown " style="position:relative; float: right; margin-right: 10%; height: 50px;">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="height: 50px" >Filter By
-        <ul class="dropdown-menu">
-          <li><a href="#">Skills</a></li>
-          <li><a href="#">Working Experience</a></li>
-          <li><a href="#">Job Title</a></li>
-        </ul>
+        </button>
+
+        <div class="dropdown-menu" id = "dropdown">
+          <button class="dropdown-item"  href="#">Skills</button>
+          <button class="dropdown-item" href="#">Work Experience</button>
+          <button class="dropdown-item" href="#">Job Title</button>
+        </div>
       </div>
+
+
+
+
 
     </div>
 
 
     <script>
-    $(document).ready(function(){
-      $("#myInput").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $(".dropdown-menu li").filter(function() {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
+      var filter,value;
+      // get the global var and Retrieve from the local storage
+      if (typeof(Storage) !== "undefined") {
+
+        document.getElementById("result").innerHTML = sessionStorage.getItem("user");
+
+      } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+      }
+      // end of display names
+
+      $(".dropdown-item").click(function(){
+         filter = $(this).text();
+      //  console.log(filter);
+         value = $("#searchitem").val();
+        console.log(value);
       });
-    });
+
     </script>
 </body>
 
