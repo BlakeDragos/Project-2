@@ -2,14 +2,14 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Employer = sequelize.define(
-    "employer",
+    "Employer",
     {
-      id: {
-        type: DataTypes.INTEGER(11),
-        allowNull: false,
-        primaryKey: true,
-        field: "id"
-      },
+      // id: {
+      //   type: DataTypes.INTEGER(11),
+      //   allowNull: false,
+      //   primaryKey: true,
+      //   field: "id"
+      // },
       userName: {
         type: DataTypes.STRING(20),
         allowNull: false,
