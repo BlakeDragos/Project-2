@@ -26,6 +26,11 @@ module.exports = function(app) {
       res.json(result);
     });
   });
+  app.get("/api/Employee", function(req, res) {
+    db.Employee.findAll({}).then(function(result) {
+      res.json(result);
+    });
+  });
   app.get("/api/Skills", function(req, res) {
     db.Skills.findAll({}).then(function(result) {
       res.json(result);

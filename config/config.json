@@ -1,14 +1,14 @@
 {
   "development": {
     "username": "root",
-    "password": "Filbert_8",
+    "password": "",
     "database": "JobSiteDB",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": "",
     "database": "testdb",
     "host": "localhost",
     "dialect": "mysql",

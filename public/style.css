@@ -1,5 +1,4 @@
-
-
+/* Change this breakpoint if you change the breakpoint of the navbar */
 
 @media (min-width: 992px) {
     .animate {
@@ -9,7 +8,7 @@
       -webkit-animation-fill-mode: both;
     }
   }
-
+  
   @keyframes slideIn {
     0% {
       transform: translateY(1rem);
@@ -24,7 +23,7 @@
       opacity: 0;
     }
   }
-
+  
   @-webkit-keyframes slideIn {
     0% {
       -webkit-transform: transform;
@@ -39,14 +38,14 @@
       -webkit-opacity: 0;
     }
   }
-
+  
   .slideIn {
     -webkit-animation-name: slideIn;
     animation-name: slideIn;
   }
-
+  
   /* Other styles for the page not related to the animated dropdown */
-
+  
   body {
     background: #007bff;
     background: linear-gradient(to right, #0062E6, #33AEFF);
