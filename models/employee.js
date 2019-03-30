@@ -38,13 +38,16 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     {
-      tableName: "employee",
-      classMethods: {
-        associate: function(models) {
-          Employee.hasMany(models.Skills, { through: models.Rtable });
-        }
-      }
+      tableName: "employee"
     }
   );
+
+  Employee.associate = function(models) {
+    Employee.belongsToMany(models.Skills, {
+      through: models.Rtable,
+      foreignKey: "idEmployee"
+    });
+  };
+
   return Employee;
 };

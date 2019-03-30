@@ -18,13 +18,15 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     {
-      tableName: "skills",
-      classMethods: {
-        associate: function(models) {
-          Skills.belongsTo(models.Employee, { through: models.Rtable });
-        }
-      }
+      tableName: "skills"
     }
   );
+
+  Skills.associate = function(models) {
+    Skills.belongsToMany(models.Employee, {
+      through: models.Rtable,
+      foreignKey: "idSkills"
+    });
+  };
   return Skills;
 };
