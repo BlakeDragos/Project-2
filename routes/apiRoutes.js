@@ -61,7 +61,7 @@ module.exports = function(app) {
   app.get("/api/Employee/:userName", function(req, res) {
     db.Employee.findOne({
       where: {
-        usuerName: req.parms.userName
+        userName: req.params.userName
       }
     }).then(function(result) {
       res.json({
@@ -97,10 +97,26 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/api/Skills/:idEmployee", function(req, res) {
+  app.post("/api/query", function(req, res) {
+    db.Employee.findAll({
+      include: [
+        {
+          model: db.Skills,
+          attributes: ["skill"],
+          // eslint-disable-next-line camelcase
+          through: { where: { id: [1, 2] } }
+        }
+      ]
+    }).then(function(result) {
+      res.json(result);
+    });
+  });
+
+  app.get("/api/Rtable/:idEmployee", function(req, res) {
+    console.log(req.params.idEmployee);
     db.Rtable.findAll({
       where: {
-        id: req.parms.idEmployee
+        idEmployee: req.params.idEmployee
       }
     }).then(function(result) {
       res.json(result);

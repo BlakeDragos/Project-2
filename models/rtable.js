@@ -24,7 +24,19 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     {
-      tableName: "rtable"
+      tableName: "rtable",
+      classMethods: {
+        associate: function(models) {
+          Rtable.belongsTo(models.Employee, {
+            foreignKey: "id",
+            targetKey: "idEmployee"
+          });
+          Rtable.belongsTo(models.Skills, {
+            foreignKey: "id",
+            targetKey: "idSkills"
+          });
+        }
+      }
     }
   );
 
