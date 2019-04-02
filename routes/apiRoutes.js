@@ -78,6 +78,7 @@ module.exports = function(app) {
     .then(function(data) {
       res.json(data)
     });
+  });
 
   app.get("/api/Employee/:userName", function(req, res) {
     db.Employee.findOne({
