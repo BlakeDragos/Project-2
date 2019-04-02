@@ -66,6 +66,20 @@ module.exports = function(app) {
       res.json(dbEmployee);
     });
   });
+  app.put("/api/Employee/:userName", function (req, res) {
+    db.Employee.update(
+      {userName: req.body.userName,
+        name: req.body.name,
+        jobTitle: req.body.jobTitle,
+        contactInfo: req.body.contactInfo,
+        bio: req.body.bio},
+      {where: { userName: req.params.userName
+      }})
+    .then(function(rowsUpdated) {
+      res.json(rowsUpdated)
+    })
+    .catch(next)
+   })
 
   app.get("/api/Employee/:userName", function(req, res) {
     db.Employee.findOne({
@@ -108,7 +122,8 @@ module.exports = function(app) {
   });
 
   app.post("/api/query", function(req, res) {
-    var array = [1,2];
+    var array;
+    array = req.body.skillIds;
     db.Employee.findAll({
       include: [
         {
