@@ -134,13 +134,20 @@ module.exports = function(app) {
       include: [
         {
           model: db.Skills,
+          required: true,
           attributes: ["skill"],
           // eslint-disable-next-line camelcase
-          through: { where: { id: array } }
+          through: { where: { idSkills: array } }
         }
       ]
     }).then(function(result) {
-      res.json(result);
+      var barray = [];
+      for (var i = 0 ; i< result.length; i++){
+        if (result[i].Skills.length === array.length){
+          barray.push(result[i]);
+        }
+      }
+      res.json(barray);
     });
   });
 
