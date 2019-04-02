@@ -4,6 +4,13 @@ module.exports = function(sequelize, DataTypes) {
   var Rtable = sequelize.define(
     "Rtable",
     {
+      id: {
+        type: DataTypes.INTEGER(11),
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        field: "id"
+      },
       idEmployee: {
         type: DataTypes.INTEGER(11),
         allowNull: false,

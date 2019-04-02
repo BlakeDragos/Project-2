@@ -25,6 +25,11 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
         field: "JobTitle"
       },
+      name: {
+        type: DataTypes.STRING(20),
+        allowNull: false,
+        field: "name"
+      },
       contactInfo: {
         type: DataTypes.STRING(20),
         allowNull: false,

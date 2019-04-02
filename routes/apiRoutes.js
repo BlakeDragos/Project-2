@@ -50,6 +50,7 @@ module.exports = function(app) {
   app.post("/api/Employee", function(req, res) {
     db.Employee.create({
       userName: req.body.userName,
+      name: req.body.name,
       jobTitle: req.body.jobTitle,
       contactInfo: req.body.contactInfo,
       bio: req.body.bio
@@ -61,11 +62,12 @@ module.exports = function(app) {
   app.get("/api/Employee/:userName", function(req, res) {
     db.Employee.findOne({
       where: {
-        userName: req.params.userName
+        usuerName: req.parms.userName
       }
     }).then(function(result) {
       res.json({
         userName: result.userName,
+        name: result.name,
         jobTitle: result.jobTitle,
         contactInfo: result.contactInfo,
         bio: result.bio
@@ -116,7 +118,7 @@ module.exports = function(app) {
     console.log(req.params.idEmployee);
     db.Rtable.findAll({
       where: {
-        idEmployee: req.params.idEmployee
+        id: req.parms.idEmployee
       }
     }).then(function(result) {
       res.json(result);
