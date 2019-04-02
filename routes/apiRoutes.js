@@ -68,22 +68,28 @@ module.exports = function(app) {
   });
   app.put("/api/Employee/:userName", function (req, res) {
     db.Employee.update(
-      {userName: req.body.userName,
+      {
         name: req.body.name,
         jobTitle: req.body.jobTitle,
         contactInfo: req.body.contactInfo,
         bio: req.body.bio},
       {where: { userName: req.params.userName
       }})
-    .then(function(data) {
-      res.json(data)
+    .then(function(result) {
+      res.json({
+        userName: result.userName,
+        name: result.name,
+        jobTitle: result.jobTitle,
+        contactInfo: result.contactInfo,
+        bio: result.bio
+      })
     });
   });
 
   app.get("/api/Employee/:userName", function(req, res) {
     db.Employee.findOne({
       where: {
-        usuerName: req.params.userName
+        userName: req.params.userName
       }
     }).then(function(result) {
       res.json({
