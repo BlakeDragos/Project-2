@@ -87,6 +87,7 @@ module.exports = function(app) {
       }
     }).then(function(result) {
       res.json({
+        userName: result.userName,
         name: result.name,
         jobTitle: result.jobTitle,
         contactInfo: result.contactInfo,
