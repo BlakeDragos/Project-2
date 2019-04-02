@@ -75,11 +75,9 @@ module.exports = function(app) {
         bio: req.body.bio},
       {where: { userName: req.params.userName
       }})
-    .then(function(rowsUpdated) {
-      res.json(rowsUpdated)
-    })
-    .catch(next)
-   })
+    .then(function(data) {
+      res.json(data)
+    });
 
   app.get("/api/Employee/:userName", function(req, res) {
     db.Employee.findOne({
@@ -88,7 +86,6 @@ module.exports = function(app) {
       }
     }).then(function(result) {
       res.json({
-        userName: result.userName,
         name: result.name,
         jobTitle: result.jobTitle,
         contactInfo: result.contactInfo,
