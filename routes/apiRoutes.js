@@ -93,6 +93,7 @@ module.exports = function(app) {
       }
     }).then(function(result) {
       res.json({
+        id: result.id,
         userName: result.userName,
         name: result.name,
         jobTitle: result.jobTitle,
