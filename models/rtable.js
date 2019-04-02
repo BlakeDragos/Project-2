@@ -1,9 +1,16 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define(
-    "rtable",
+  var Rtable = sequelize.define(
+    "Rtable",
     {
+      id: {
+        type: DataTypes.INTEGER(11),
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        field: "id"
+      },
       idEmployee: {
         type: DataTypes.INTEGER(11),
         allowNull: false,
@@ -24,7 +31,21 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     {
-      tableName: "rtable"
+      tableName: "rtable",
+      classMethods: {
+        associate: function(models) {
+          Rtable.belongsTo(models.Employee, {
+            foreignKey: "id",
+            targetKey: "idEmployee"
+          });
+          Rtable.belongsTo(models.Skills, {
+            foreignKey: "id",
+            targetKey: "idSkills"
+          });
+        }
+      }
     }
   );
+
+  return Rtable;
 };

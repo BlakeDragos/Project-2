@@ -2,7 +2,11 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="styles/login.css">
+=======
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+>>>>>>> master
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel = "stylesheet" href = "https://code.jquery.com/jquery-3.3.1.min.js">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -113,7 +117,10 @@
 
 
 <script type="text/javascript">
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
   $(document).ready(function(){
     $(".btn-secondary:first").click(function(){
       $(this).button('toggle');
@@ -124,20 +131,27 @@
       var newpassword =  $("#password").val().trim();
       var bio = $("#bio").val();
       var status;
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
       if (bio === "Employee"){
         status = 0;
       }
       else{
         status = 1;
       }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
       // new user info
       var newuser = {
         userName:newuser,
         password:newpassword,
         status: status
       }
+<<<<<<< HEAD
 
       $.post("api/Login/create",newuser).then(newuserinfo);
 
@@ -146,6 +160,11 @@
 
     $("#signin").click(function(){
 
+=======
+      $.post("api/Login/create",newuser).then(newuserinfo);
+    });
+    $("#signin").click(function(){
+>>>>>>> master
       // user login
       var name = $("#inputName").val();
       var password = $("#inputPassword").val().trim();
@@ -154,6 +173,7 @@
         userName : name,
         password : password
       }
+<<<<<<< HEAD
 
       $.post("api/Login",data).then(getlogin);
 
@@ -167,11 +187,23 @@
       }
 
 
+=======
+      $.post("api/Login",data).then(getlogin);
+      // verify for the user login
+      var name = getlogin.userName;
+      if (typeof(Storage) !== "undefined") {
+        // store the username to display on the search page
+        sessionStorage.setItem("user", name);
+      }
+>>>>>>> master
       if (getlogin.login === true) {
         if (getlogin.status === 0){
           // redirect employee page
           window.location.href("http://stackoverflow.com");
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
         }
         else{
           //redirect employer page
@@ -181,13 +213,22 @@
       else{
         alert ("Check your input or you just don't exist.Do you want to sign up?")
       }
+<<<<<<< HEAD
 
     });
 
   });
 
+=======
+    });
+  });
+>>>>>>> master
   </script>
 
   </body>
 
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> master

@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": null,
+    "password": "3353cougars",
     "database": "JobSiteDB",
     "host": "localhost",
     "dialect": "mysql"

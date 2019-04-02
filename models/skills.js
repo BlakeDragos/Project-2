@@ -1,15 +1,15 @@
 /* jshint indent: 2 */
-
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define(
-    "skills",
+  var Skills = sequelize.define(
+    "Skills",
     {
-      id: {
-        type: DataTypes.INTEGER(11),
-        allowNull: false,
-        primaryKey: true,
-        field: "id"
-      },
+      // id: {
+      //   type: DataTypes.INTEGER(11),
+      //   allowNull: false,
+      //   autoIncrement: true,
+      //   primaryKey: true,
+      //   field: "id"
+      // },
       skill: {
         type: DataTypes.STRING(20),
         allowNull: false,
@@ -21,4 +21,12 @@ module.exports = function(sequelize, DataTypes) {
       tableName: "skills"
     }
   );
+
+  Skills.associate = function(models) {
+    Skills.belongsToMany(models.Employee, {
+      through: models.Rtable,
+      foreignKey: "idSkills"
+    });
+  };
+  return Skills;
 };

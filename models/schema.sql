@@ -3,6 +3,7 @@ CREATE DATABASE JobSiteDB;
 
 USE JobSiteDB;
 
+
 CREATE TABLE Login (
   id INT NOT NULL AUTO_INCREMENT,
   UserName VARCHAR(20) NOT NULL,
@@ -51,3 +52,5 @@ CREATE TABLE Jobs (
   UNIQUE KEY(JobTitle),
   PRIMARY KEY (id)
 );
+
+SELECT * FROM Employee;

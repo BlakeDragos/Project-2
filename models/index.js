@@ -36,7 +36,13 @@ Object.keys(db).forEach(function(modelName) {
   }
 });
 
+
+
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+//db.Employee.hasMany(db.Skills, { through: db.Rtable });
+//db.Skills.belongsToMany(db.Employee, { through: db.Rtable });
 
 module.exports = db;
