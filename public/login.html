@@ -2,11 +2,9 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-<<<<<<< HEAD
+
     <link rel="stylesheet" type="text/css" href="styles/login.css">
-=======
-    <link rel="stylesheet" type="text/css" href="styles/style.css">
->>>>>>> master
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel = "stylesheet" href = "https://code.jquery.com/jquery-3.3.1.min.js">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -36,21 +34,11 @@
                   <input type="password" id="inputPassword" class="form-control"  required>
                   <label for="inputPassword">Password</label>
                 </div>
-
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-
-              <label class="btn btn-secondary active">
-                <input type="radio" name="options" id="option1" autocomplete="off" > Employer
-              </label>
-              <label class="btn btn-secondary">
-                <input type="radio" name="options" id="option2"  autocomplete="off"> Employee
-              </label>
-            </div>
-
+            <div class="form-label-group">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
         Register
     </button>
-
+  </div>
     <!-- Register Modal -->
       <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
           aria-hidden="true">
@@ -79,13 +67,21 @@
                                               class="form-control">
                                       </div>
                                   </div>
-                                  <div class="form-group">
+                                </br>
+                              </br>
+                                  <div class="form-group" id = "myform">
                                       <div class="col-md-12">
-                                          <textarea class="form-control" id="bio" name="bio"
-                                              placeholder="Are you Employee or Employer? Please enter either Employee or Employer."
-                                              rows="3"></textarea>
-                                      </div>
-                                  </div>
+                                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary active">
+                                  <input type="radio" name="status" id="option1" value = "1" autocomplete="off"> Employer
+                                </label>
+                                <label class="btn btn-secondary">
+                                  <input type="radio" name="status" id="option2"  value = "0" autocomplete="off"> Employee
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+
                                   <div class="form-group">
                                       <div class="col-md-12 text-center">
                                           <button id = "register" type="submit" class="btn btn-primary btn-lg">Submit</button>
@@ -117,54 +113,38 @@
 
 
 <script type="text/javascript">
-<<<<<<< HEAD
 
-=======
->>>>>>> master
+
+
   $(document).ready(function(){
     $(".btn-secondary:first").click(function(){
       $(this).button('toggle');
     });
+
+    var status;
+    var newuserinfo;
+
+    status = $("#myform input[type='radio']:checked").val();
+
     $("#register").click(function(){
       // createUser
       var newuser = $("#userName").val();
       var newpassword =  $("#password").val().trim();
-      var bio = $("#bio").val();
-      var status;
-<<<<<<< HEAD
 
-=======
->>>>>>> master
-      if (bio === "Employee"){
-        status = 0;
-      }
-      else{
-        status = 1;
-      }
-<<<<<<< HEAD
 
-=======
->>>>>>> master
       // new user info
       var newuser = {
         userName:newuser,
         password:newpassword,
         status: status
       }
-<<<<<<< HEAD
 
-      $.post("api/Login/create",newuser).then(newuserinfo);
+      status = $('input[name=status]:checked').val();
 
-    });
-
-
-    $("#signin").click(function(){
-
-=======
       $.post("api/Login/create",newuser).then(newuserinfo);
     });
     $("#signin").click(function(){
->>>>>>> master
+
       // user login
       var name = $("#inputName").val();
       var password = $("#inputPassword").val().trim();
@@ -173,21 +153,7 @@
         userName : name,
         password : password
       }
-<<<<<<< HEAD
 
-      $.post("api/Login",data).then(getlogin);
-
-      // verify for the user login
-      var name = getlogin.userName;
-
-      if (typeof(Storage) !== "undefined") {
-        // store the username to display on the search page
-        sessionStorage.setItem("user", name);
-
-      }
-
-
-=======
       $.post("api/Login",data).then(getlogin);
       // verify for the user login
       var name = getlogin.userName;
@@ -195,40 +161,27 @@
         // store the username to display on the search page
         sessionStorage.setItem("user", name);
       }
->>>>>>> master
+
       if (getlogin.login === true) {
         if (getlogin.status === 0){
           // redirect employee page
-          window.location.href("http://stackoverflow.com");
-<<<<<<< HEAD
+          window.location.href("/employee");
 
-=======
->>>>>>> master
         }
         else{
           //redirect employer page
-          window.location.href("http://google.com");
+          window.location.href("/employer");
         }
       }
       else{
         alert ("Check your input or you just don't exist.Do you want to sign up?")
       }
-<<<<<<< HEAD
 
     });
-
   });
 
-=======
-    });
-  });
->>>>>>> master
   </script>
 
   </body>
 
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> master
