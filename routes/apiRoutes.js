@@ -36,6 +36,14 @@ module.exports = function(app) {
       res.json(result);
     });
   });
+  app.get("/api/Jobs/:jobTitle", function(req, res) {
+    db.Employee.findAll({
+      where: {
+      jobTitle: req.params.jobTitle
+    }}).then(function(result) {
+      res.json(result);
+    });
+  });
   // Create a new example
   app.post("/api/Login/create", function(req, res) {
     db.Login.create({
@@ -62,7 +70,7 @@ module.exports = function(app) {
   app.get("/api/Employee/:userName", function(req, res) {
     db.Employee.findOne({
       where: {
-        usuerName: req.parms.userName
+        usuerName: req.params.userName
       }
     }).then(function(result) {
       res.json({
@@ -100,13 +108,14 @@ module.exports = function(app) {
   });
 
   app.post("/api/query", function(req, res) {
+    var array = [1,2];
     db.Employee.findAll({
       include: [
         {
           model: db.Skills,
           attributes: ["skill"],
           // eslint-disable-next-line camelcase
-          through: { where: { id: [1, 2] } }
+          through: { where: { id: array } }
         }
       ]
     }).then(function(result) {
@@ -118,7 +127,7 @@ module.exports = function(app) {
     console.log(req.params.idEmployee);
     db.Rtable.findAll({
       where: {
-        id: req.parms.idEmployee
+        id: req.params.idEmployee
       }
     }).then(function(result) {
       res.json(result);
