@@ -26,12 +26,12 @@
               <h3 class="login-heading mb-4">Welcome back!</h3>
               <form>
                 <div class="form-label-group">
-                  <input type="email" id="inputName" class="form-control"  required>
+                  <input type="username" id="inputName" class="form-control"  >
                   <label for="inputEmail">User Name</label>
                 </div>
 
                 <div class="form-label-group">
-                  <input type="password" id="inputPassword" class="form-control"  required>
+                  <input type="password" id="inputPassword" class="form-control" >
                   <label for="inputPassword">Password</label>
                 </div>
             <div class="form-label-group">
@@ -52,7 +52,7 @@
                   </div>
                   <div class="modal-body">
                       <div class="well well-sm">
-                          <form class="form-horizontal" method="post">
+                          <form class="form-horizontal">
                               <fieldset>
                                   <legend class="text-center header">Register</legend>
                                   <div class="form-group">
@@ -113,18 +113,14 @@
 
 
 <script type="text/javascript">
-
+var status;
+var newuserinfo;
 
 
   $(document).ready(function(){
     $(".btn-secondary:first").click(function(){
       $(this).button('toggle');
     });
-
-    var status;
-    var newuserinfo;
-
-    status = $("#myform input[type='radio']:checked").val();
 
     $("#register").click(function(){
       // createUser
@@ -140,7 +136,7 @@
       }
 
       status = $('input[name=status]:checked').val();
-
+       console.log("dkjashdakjdhajshd",status);
       $.post("api/Login/create",newuser).then(newuserinfo);
     });
     $("#signin").click(function(){
@@ -153,26 +149,28 @@
         userName : name,
         password : password
       }
-
-      $.post("api/Login",data).then(getlogin);
-      // verify for the user login
-      var name = getlogin.userName;
-      if (typeof(Storage) !== "undefined") {
-        // store the username to display on the search page
-        sessionStorage.setItem("user", name);
-      }
-
-      if (getlogin.login === true) {
-        if (getlogin.status === 0){
-          // redirect employee page
-          window.location.href("/employee");
-
+      var getlogin;
+      $.post("api/Login",data).then(function(getlogin){
+        // verify for the user login
+        var name = getlogin.userName;
+        if (typeof(Storage) !== "undefined") {
+          // store the username to display on the search page
+          sessionStorage.setItem("user", name);
         }
-        else{
-          //redirect employer page
-          window.location.href("/employer");
+
+        if (getlogin.login === true) {
+          if (getlogin.status === 0){
+            // redirect employee page
+            window.location.href("/employee");
+
+          }
+          else{
+            //redirect employer page
+            window.location.href("/employer");
+          }
         }
-      }
+      });
+
       else{
         alert ("Check your input or you just don't exist.Do you want to sign up?")
       }
