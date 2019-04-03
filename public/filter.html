@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/filter.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <title>Filter</title>
+</head>
+<style>
+ /* Style the input field */
+
+ </style>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" style = "float:left; position: absolute">Welcome, <div style= "position: relative;float: right"id="result"></div></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+        </div>
+    </nav>
+
+    <div class="container" >
+
+      <!-- Search form -->
+      <div class = "row1"><h3> Filter By  </h3></div>
+    </br>
+  </br>
+      <div class = "row2"> <!-- skills section -->
+
+
+      <div id = "skillbutton"></div>
+
+
+
+      <form id="skill-form">
+        <label for="skill-input"></label>
+        <input class="form-control col-sm-1" type="text" id="skill-input">
+        <input class="btn btn-info" id="add-skill" type="submit" value="Add A Skill!">
+      </form>
+      </div>
+
+    </br>
+    </br>
+
+      <div class = "row3">
+
+
+        <div id = "jobbutton"> </div>
+
+
+        <form id="job-form">
+          <label for="job-input"></label>
+          <input class="form-control col-sm-1" type="text" id="job-input">
+          <input class="btn btn-info" id="add-job" type="submit" value="Add A Job!">
+        </form>
+    </div>
+
+
+      <div class = "row3">
+        <!-- display the clicked buttons -->
+
+        <div class = "col-sm-8" id = "buttonclick"></div>
+        <div class = "col-sm-4"><input class="btn btn-info" id="search" type="submit" value="Search"> </div>
+      </div>
+
+
+    <div id = "display"> </div>
+  </div>
+    <script>
+      var filterskill=[];
+      var filterjob = [];
+
+      // get the global var and Retrieve from the local storage
+      if (typeof(Storage) !== "undefined") {
+
+        document.getElementById("result").innerHTML = sessionStorage.getItem("user");
+
+      } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+      }
+      // end of display names
+
+
+      // get all the skills and render the buttons for all the skills
+      function renderButtons(){
+        $("#skillbutton").empty();
+        $("#jobbutton").empty();
+
+        $.get("api/Skills",function(data){
+          filterskill = data;
+        });
+
+
+        $.get("api/Jobs",function(back){
+          filterjob = back;
+        });
+
+        for (var i = 0; i < filterskill.length; i++) {
+
+          // Then dynamicaly generating buttons for each movie in the array
+          // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+          var a = $("<button>");
+          // Adding a class of movie-btn to our button
+          a.addClass("skill-btn");
+          // Adding a data-attribute
+          a.attr("data-id", filterskill[i].id);
+          // Providing the initial button text
+          a.text(filterskill[i]);
+          // Adding the button to the buttons-view div
+          $("#skillbutton").append(a);
+        }
+
+        for (var i = 0; i < filterjob.length; i++) {
+          // Then dynamicaly generating buttons for each movie in the array
+          // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+          var a = $("<button>");
+          // Adding a class of movie-btn to our button
+          a.addClass("job-btn");
+          // Adding a data-attribute
+          a.attr("data-id", jobskill[i].id);
+          // Providing the initial button text
+          a.text(jobskill[i]);
+          // Adding the button to the buttons-view div
+          $("#jobbutton").append(a);
+        }1
+
+      }
+
+      // when the user add skills, render the buttons and add to the database
+      $("#add-skill").on("click", function(event) {
+        event.preventDefault();
+        var skill = $("#skill-input").val().trim();
+        filterskill.push(skill);
+        var newskill = {
+          Skill: skill
+        }
+        $.post("api/Skills",newskill).then(back); // post to the database
+        renderButtons();
+      });
+
+
+
+      $("#add-job").on("click", function(event) {
+        event.preventDefault();
+        var job = $("#job-input").val().trim();
+        filterjob.push(job);
+        var newsjob = {
+          Job: job
+        }
+        $.post("api/Jobs",newjob).then(back); // post to the database
+        renderButtons();
+      });
+
+      renderButtons();
+
+
+      var info, infoo;
+      var name;
+      var skillby,jobby;
+      var searchbyskill = [];
+      var searchbyjob = [];
+
+      $(".skill-btn").on("click",function(event){
+          event.preventDefault();
+          info = $(this).attr("data-id");
+          name = $(this).text;
+          skillby = $("<button>");
+          // Adding a class of movie-btn to our button
+          skillby.addClass("skillclick");
+          // Adding a data-attribute
+          skillby.attr("data-id", info);
+          // Providing the initial button text
+          skill.text(info);
+          // Adding the button to the buttons-view div
+          $("#buttonclick").append(skill);
+          searchbyskill.push(info);
+
+      });
+
+      $(".job-btn").on("click",function(event){
+          event.preventDefault();
+          infoo = $(this).attr("data-id");
+          name = $(this).text;
+          jobby = $("<button>");
+          // Adding a class of movie-btn to our button
+          jobby.addClass("jobclick");
+          // Adding a data-attribute
+          jobby.attr("data-id", infoo);
+          // Providing the initial button text
+          jobby.text(infoo);
+          // Adding the button to the buttons-view div
+          $("#buttonclick").append(jobby);
+          searchbyjob.push(infoo);
+      });
+
+      function renderinfo (datainfo){
+        $("buttonclick").empty();
+        for (var i = 0; i < datainfo.length;i++){
+          var b = $("<p>");
+          b.text(datainfo[i]);
+        }
+
+      }
+      // display the button clicked to the different section and once hit filter by start search
+      // filter by the Skills
+      $.post("api/query",searchbyskill,function(empolyee){
+          renderinfo(employee);
+      });
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
