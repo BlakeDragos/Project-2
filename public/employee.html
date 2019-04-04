@@ -24,30 +24,15 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Do Something</a>
-                        <!-- Here's the magic. Add the .animate and .slide-in classes to your .dropdown-menu and you're all set! -->
-                        <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Search For Job</a>
-                            <a class="dropdown-item" href="#">Update/View Profile</a>
-                            <!-- <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a> -->
-                        </div>
-                    </li>
-                </ul>
-            </div>
         </div>
     </nav>
     <div class="container">
         <div class="row">
             <div class="col">
-                
+                <strong><h2>Skills: <span id="skillsDump"></span></h2></strong>
                 <div id="well-section">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal">
-                            Update Employee Info</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal">
+                        Update Employee Info</button>
                 </div>
             </div>
         </div>
@@ -70,8 +55,20 @@
                                 <legend class="text-center header">Update your employee profile</legend>
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <input id="jobTitle" name="jobTitle" type="text" placeholder="Update Job Title"
+                                        <input id="name" name="name" type="text" placeholder="Update Your Name"
                                             class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <select class="form-control" id="dropdown-jobs-list" name="dropdown-jobs-list"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <select class="form-control dropdown-skill-list" name="skill_ids[]"></select>
+                                        <br>
+                                        <button type="button" class="btn btn-primary" id="anotherSkill">Choose another skill</button>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -82,14 +79,14 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <textarea class="form-control" id="bio" name="bio"
-                                            placeholder="Update Bio."
+                                        <textarea class="form-control" id="bio" name="bio" placeholder="Update Bio."
                                             rows="7"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12 text-center">
-                                        <button type="submit" id="updateEmployee"class="btn btn-primary btn-lg">Submit</button>
+                                        <button type="submit" id="updateEmployee"
+                                            class="btn btn-primary btn-lg">Submit</button>
                                     </div>
                                 </div>
                             </fieldset>

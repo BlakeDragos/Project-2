@@ -37,12 +37,11 @@ module.exports = function(app) {
     });
   });
   app.get("/api/Jobs/:jobTitle", function(req, res) {
-    db.Employee.findAll({
+    db.Employee.findone({
       where: {
-        jobTitle: req.params.jobTitle
-      }
-    }).then(function(result) {
-      res.json(result);
+      id: req.params.jobTitle
+    }}).then(function(result) {
+      res.json({JobName : result.jobTitle});
     });
   });
   // Create a new example
@@ -131,7 +130,8 @@ module.exports = function(app) {
 
   app.post("/api/query", function(req, res) {
     var array;
-    array = req.body.skillIds;
+    console.log(req.body);
+    array = req.body["skillIds[]"];
     db.Employee.findAll({
       include: [
         {
@@ -155,12 +155,14 @@ module.exports = function(app) {
 
   app.get("/api/Rtable/:idEmployee", function(req, res) {
     console.log(req.params.idEmployee);
+    var carray = []
     db.Rtable.findAll({
-      where: {
-        id: req.params.idEmployee
-      }
+       where: { idEmployee: req.params.idEmployee } 
     }).then(function(result) {
-      res.json(result);
+      for(var i = 0; i < result.length; i++){
+        carray.push(result[i].idSkills)
+      }
+      res.json(carray);
     });
   });
   // Delete an example by id
