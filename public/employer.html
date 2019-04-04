@@ -20,6 +20,7 @@
 </head>
 
 <body>
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="#">Welcome, </a>
@@ -27,13 +28,12 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
+            <!-- Dropdown menu -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Do Something</a>
-                        <!-- Here's the magic. Add the .animate and .slide-in classes to your .dropdown-menu and you're all set! -->
                         <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Post a Job</a>
                             <a class="dropdown-item" href="#">Update/View Profile</a>
@@ -48,9 +48,11 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employee-search-modal">Search For
         Employees</button>
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employee-profile-modal">Add Job</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employee-profile-modal">Add
+        Job</button>
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employee-skill-modal">Add Skill</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employee-skill-modal">Add
+        Skill</button>
 
     <!-- Search for employee modal -->
     <div class="modal fade" id="employee-search-modal" tabindex="-1" role="dialog"
@@ -71,7 +73,8 @@
 
                                 <select class="form-control" id="dropdown-skill-list"></select>
                                 <br>
-                                <button type="button" class="btn btn-primary" id="anotherSkill">Choose another skill</button>
+                                <button type="button" class="btn btn-primary" id="anotherSkill">Choose another
+                                    skill</button>
 
                                 <div class="form-group">
                                     <div class="col-md-12 text-center">
@@ -90,7 +93,7 @@
     </div>
 
 
-<!-- add job modals-->
+    <!-- add job modals-->
     <div class="modal fade" id="employee-profile-modal" tabindex="-1" role="dialog" aria-labelledby="addjobModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -114,7 +117,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12 text-center">
-                                        <button id = "addjob" type="submit" class="btn btn-primary btn-lg">Add</button>
+                                        <button id="addjob" type="submit" class="btn btn-primary btn-lg">Add</button>
                                     </div>
                                 </div>
                             </fieldset>
@@ -127,39 +130,39 @@
 
 
     <!-- add skill modals-->
-        <div class="modal fade" id="employee-skill-modal" tabindex="-1" role="dialog" aria-labelledby="addjobModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="registerModalLabel">Add a new Skill!</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="well well-sm">
-                            <form class="form-horizontal" method="post">
-                                <fieldset>
-                                    <legend class="text-center header">Skill Name</legend>
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <input id="skillname" name="skillname" type="text" placeholder="SkillName"
-                                                class="form-control">
-                                        </div>
+    <div class="modal fade" id="employee-skill-modal" tabindex="-1" role="dialog" aria-labelledby="addjobModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Add a new Skill!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="well well-sm">
+                        <form class="form-horizontal" method="post">
+                            <fieldset>
+                                <legend class="text-center header">Skill Name</legend>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input id="skillname" name="skillname" type="text" placeholder="SkillName"
+                                            class="form-control">
                                     </div>
-                                    <div class="form-group">
-                                        <div class="col-md-12 text-center">
-                                            <button id = "addskill" type="submit" class="btn btn-primary btn-lg">Add</button>
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12 text-center">
+                                        <button id="addskill" type="submit" class="btn btn-primary btn-lg">Add</button>
                                     </div>
-                                </fieldset>
-                            </form>
-                        </div>
+                                </div>
+                            </fieldset>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 
     <script type="text/javascript">
@@ -171,26 +174,38 @@
                     $('#dropdown-skill-list').append('<option>' + skill + '</option>');
                 };
             });
-            // add a new dropdown once a skill from the previous one was selected
-            function newDropdown() {
-                $('.dropdown').append('#divNewSkills');
-            };
 
+            // add another dropdown on button click
             $('#anotherSkill').on("click", (function () {
                 var selectList = $('#dropdown-skill-list').clone();
                 $('#dropdown-skill-list').after(selectList);
-            })
+            }));
 
-            // append new skills when they're added to database
-            );
-            $("#addjob").click(function(){
-              var newjob = $("#jobtitle").val();
-              $.post("api/Jobs",newjob).then(back);
+            // get selected skills and put in array
+            var selectedSkills = [];
+            $("#search-btn").on("click", function () {
+                
+
             });
 
-            $("#addskill").click(function(){
-              var newskill = $("skillname").val();
-              $.post("api/Skills",newskill).then(back);
+            // query the database and find the matching employees
+            $.get("/api/Skills", function(employee) {
+
+
+            });
+
+
+
+            // append new skills when they're added to database
+
+            $("#addjob").click(function () {
+                var newjob = $("#jobtitle").val();
+                $.post("api/Jobs", newjob).then(back);
+            });
+
+            $("#addskill").click(function () {
+                var newskill = $("skillname").val();
+                $.post("api/Skills", newskill).then(back);
             });
 
         });
