@@ -48,9 +48,11 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employee-search-modal">Search For
         Employees</button>
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employee-profile-modal">Add Job</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employee-profile-modal">Add
+        Job</button>
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employee-skill-modal">Add Skill</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employee-skill-modal">Add
+        Skill</button>
 
     <!-- Search for employee modal -->
     <div class="modal fade" id="employee-search-modal" tabindex="-1" role="dialog"
@@ -71,7 +73,8 @@
 
                                 <select class="form-control" id="dropdown-skill-list"></select>
                                 <br>
-                                <button type="button" class="btn btn-primary" id="anotherSkill">Choose another skill</button>
+                                <button type="button" class="btn btn-primary" id="anotherSkill">Choose another
+                                    skill</button>
 
                                 <div class="form-group">
                                     <div class="col-md-12 text-center">
@@ -90,7 +93,7 @@
     </div>
 
 
-<!-- add job modals-->
+    <!-- add job modals-->
     <div class="modal fade" id="employee-profile-modal" tabindex="-1" role="dialog" aria-labelledby="addjobModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -103,7 +106,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="well well-sm">
-                        <form class="form-horizontal" method="post">
+                        <form class="form-horizontal jobAdd">
                             <fieldset>
                                 <legend class="text-center header">Job Title</legend>
                                 <div class="form-group">
@@ -114,7 +117,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12 text-center">
-                                        <button id = "addjob" type="submit" class="btn btn-primary btn-lg">Add</button>
+                                        <button id="addjob" type="submit" class="btn btn-primary btn-lg">Add</button>
                                     </div>
                                 </div>
                             </fieldset>
@@ -127,39 +130,39 @@
 
 
     <!-- add skill modals-->
-        <div class="modal fade" id="employee-skill-modal" tabindex="-1" role="dialog" aria-labelledby="addjobModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="registerModalLabel">Add a new Skill!</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="well well-sm">
-                            <form class="form-horizontal" method="post">
-                                <fieldset>
-                                    <legend class="text-center header">Skill Name</legend>
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <input id="skillname" name="skillname" type="text" placeholder="SkillName"
-                                                class="form-control">
-                                        </div>
+    <div class="modal fade" id="employee-skill-modal" tabindex="-1" role="dialog" aria-labelledby="addjobModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Add a new Skill!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="well well-sm">
+                        <form class="form-horizontal skillAdd" method="post">
+                            <fieldset>
+                                <legend class="text-center header">Skill Name</legend>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input id="skillname" name="skillname" type="text" placeholder="SkillName"
+                                            class="form-control">
                                     </div>
-                                    <div class="form-group">
-                                        <div class="col-md-12 text-center">
-                                            <button id = "addskill" type="submit" class="btn btn-primary btn-lg">Add</button>
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12 text-center">
+                                        <button id="addskill" type="submit" class="btn btn-primary btn-lg">Add</button>
                                     </div>
-                                </fieldset>
-                            </form>
-                        </div>
+                                </div>
+                            </fieldset>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 
     <script type="text/javascript">
@@ -181,16 +184,24 @@
                 $('#dropdown-skill-list').after(selectList);
             })
 
-            // append new skills when they're added to database
+                // append new skills when they're added to database
             );
-            $("#addjob").click(function(){
-              var newjob = $("#jobtitle").val();
-              $.post("api/Jobs",newjob).then(back);
+            $(document).on("submit", ".jobAdd", function (e) {
+                e.preventDefault();
+                var newjob = {
+                    jobTitle : $("#jobtitle").val()
+                }
+                $.post("/api/Jobs", newjob).then(function(response){
+                    console.log(response);
+                });
             });
 
-            $("#addskill").click(function(){
-              var newskill = $("skillname").val();
-              $.post("api/Skills",newskill).then(back);
+            $(document).on("submit",".skillAdd",function (e) {
+                e.preventDefault();
+                var newskill = {
+                    skill : $("skillname").val()
+                }
+                $.post("api/Skills", newskill).then(back);
             });
 
         });
