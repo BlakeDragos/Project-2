@@ -104,6 +104,7 @@ module.exports = function(app) {
   });
 
   app.post("/api/Skills", function(req, res) {
+    console.log(req.body);
     db.Skills.create({
       skill: req.body.skill
     }).then(function(dbSkill) {
