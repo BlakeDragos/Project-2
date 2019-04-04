@@ -199,9 +199,11 @@
             $(document).on("submit",".skillAdd",function (e) {
                 e.preventDefault();
                 var newskill = {
-                    skill : $("skillname").val()
+                    skill : $("#skillname").val()
                 }
-                $.post("api/Skills", newskill).then(back);
+                $.post("/api/Skills", newskill).then(function(response){
+                    console.log(response);
+                });
             });
 
         });
