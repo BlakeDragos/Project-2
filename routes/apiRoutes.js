@@ -9,7 +9,7 @@ module.exports = function(app) {
         password: req.body.password
       }
     }).then(function(result) {
-      if (result.length === 0) {
+      if (!result) {
         return res.json({ login: false });
       } else {
         return res.json({
