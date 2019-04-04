@@ -127,7 +127,7 @@ var newuserinfo;
       var newuser = $("#userName").val();
       var newpassword =  $("#password").val().trim();
       status = $('input[name=status]:checked').val();
-
+      sessionStorage.setItem("firstTime", true);
       // new user info
       var newuser = {
         userName:newuser,
