@@ -39,8 +39,9 @@ module.exports = function(app) {
   app.get("/api/Jobs/:jobTitle", function(req, res) {
     db.Employee.findAll({
       where: {
-      jobTitle: req.params.jobTitle
-    }}).then(function(result) {
+        jobTitle: req.params.jobTitle
+      }
+    }).then(function(result) {
       res.json(result);
     });
   });
@@ -66,23 +67,23 @@ module.exports = function(app) {
       res.json(dbEmployee);
     });
   });
-  app.put("/api/Employee/:userName", function (req, res) {
+  app.put("/api/Employee/:userName", function(req, res) {
     db.Employee.update(
       {
         name: req.body.name,
         jobTitle: req.body.jobTitle,
         contactInfo: req.body.contactInfo,
-        bio: req.body.bio},
-      {where: { userName: req.params.userName
-      }})
-    .then(function(result) {
+        bio: req.body.bio
+      },
+      { where: { userName: req.params.userName } }
+    ).then(function(result) {
       res.json({
         userName: result.userName,
         name: result.name,
         jobTitle: result.jobTitle,
         contactInfo: result.contactInfo,
         bio: result.bio
-      })
+      });
     });
   });
 
@@ -143,8 +144,8 @@ module.exports = function(app) {
       ]
     }).then(function(result) {
       var barray = [];
-      for (var i = 0 ; i< result.length; i++){
-        if (result[i].Skills.length === array.length){
+      for (var i = 0; i < result.length; i++) {
+        if (result[i].Skills.length === array.length) {
           barray.push(result[i]);
         }
       }
