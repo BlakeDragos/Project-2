@@ -126,7 +126,7 @@ var newuserinfo;
       // createUser
       var newuser = $("#userName").val();
       var newpassword =  $("#password").val().trim();
-
+      status = $('input[name=status]:checked').val();
 
       // new user info
       var newuser = {
@@ -135,7 +135,6 @@ var newuserinfo;
         status: status
       }
 
-      status = $('input[name=status]:checked').val();
        console.log("dkjashdakjdhajshd",status);
       $.post("api/Login/create",newuser).then(newuserinfo);
     });
@@ -161,19 +160,17 @@ var newuserinfo;
         if (getlogin.login === true) {
           if (getlogin.status === 0){
             // redirect employee page
-            window.location.href("/employee");
+            window.location.replace("http://localhost:3000/employee.html");
 
           }
           else{
             //redirect employer page
-            window.location.href("/employer");
+            window.location.replace("http://localhost:3000/employer.html");
           }
-        }
-      });
-
-      else{
+        }else{
         alert ("Check your input or you just don't exist.Do you want to sign up?")
       }
+      });
 
     });
   });
