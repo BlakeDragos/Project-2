@@ -106,7 +106,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="well well-sm">
-                        <form class="form-horizontal" method="post">
+                        <form class="form-horizontal jobAdd">
                             <fieldset>
                                 <legend class="text-center header">Job Title</legend>
                                 <div class="form-group">
@@ -142,7 +142,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="well well-sm">
-                        <form class="form-horizontal" method="post">
+                        <form class="form-horizontal skillAdd" method="post">
                             <fieldset>
                                 <legend class="text-center header">Skill Name</legend>
                                 <div class="form-group">
@@ -196,16 +196,26 @@
 
 
 
-            // append new skills when they're added to database
-
-            $("#addjob").click(function () {
-                var newjob = $("#jobtitle").val();
-                $.post("api/Jobs", newjob).then(back);
+                // append new skills when they're added to database
+            
+            $(document).on("submit", ".jobAdd", function (e) {
+                e.preventDefault();
+                var newjob = {
+                    jobTitle : $("#jobtitle").val()
+                }
+                $.post("/api/Jobs", newjob).then(function(response){
+                    console.log(response);
+                });
             });
 
-            $("#addskill").click(function () {
-                var newskill = $("skillname").val();
-                $.post("api/Skills", newskill).then(back);
+            $(document).on("submit",".skillAdd",function (e) {
+                e.preventDefault();
+                var newskill = {
+                    skill : $("#skillname").val()
+                }
+                $.post("/api/Skills", newskill).then(function(response){
+                    console.log(response);
+                });
             });
 
         });
