@@ -7,9 +7,9 @@ module.exports = function(app) {
   app.get("/employer", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/employer.html"));
   });
-  app.get("/search", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/search.html"));
-  });
+  // app.get("/search", function(req, res) {
+  //   res.sendFile(path.join(__dirname, "../public/search.html"));
+  // });
   app.get("/employee", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/employee.html"));
   });
