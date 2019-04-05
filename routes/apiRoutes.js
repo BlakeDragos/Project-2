@@ -9,7 +9,7 @@ module.exports = function(app) {
         password: req.body.password
       }
     }).then(function(result) {
-      if (result.length === 0) {
+      if (!result) {
         return res.json({ login: false });
       } else {
         return res.json({
@@ -36,6 +36,14 @@ module.exports = function(app) {
       res.json(result);
     });
   });
+  app.get("/api/Jobs/:jobTitle", function(req, res) {
+    db.Employee.findone({
+      where: {
+      id: req.params.jobTitle
+    }}).then(function(result) {
+      res.json({JobName : result.jobTitle});
+    });
+  });
   // Create a new example
   app.post("/api/Login/create", function(req, res) {
     db.Login.create({
@@ -58,14 +66,34 @@ module.exports = function(app) {
       res.json(dbEmployee);
     });
   });
+  app.put("/api/Employee/:userName", function (req, res) {
+    db.Employee.update(
+      {
+        name: req.body.name,
+        jobTitle: req.body.jobTitle,
+        contactInfo: req.body.contactInfo,
+        bio: req.body.bio},
+      {where: { userName: req.params.userName
+      }})
+    .then(function(result) {
+      res.json({
+        userName: result.userName,
+        name: result.name,
+        jobTitle: result.jobTitle,
+        contactInfo: result.contactInfo,
+        bio: result.bio
+      })
+    });
+  });
 
   app.get("/api/Employee/:userName", function(req, res) {
     db.Employee.findOne({
       where: {
-        usuerName: req.parms.userName
+        userName: req.params.userName
       }
     }).then(function(result) {
       res.json({
+        id: result.id,
         userName: result.userName,
         name: result.name,
         jobTitle: result.jobTitle,
@@ -76,6 +104,7 @@ module.exports = function(app) {
   });
 
   app.post("/api/Skills", function(req, res) {
+    console.log(req.body);
     db.Skills.create({
       skill: req.body.skill
     }).then(function(dbSkill) {
@@ -100,28 +129,40 @@ module.exports = function(app) {
   });
 
   app.post("/api/query", function(req, res) {
+    var array;
+    console.log(req.body);
+    array = req.body["skillIds[]"];
     db.Employee.findAll({
       include: [
         {
           model: db.Skills,
+          required: true,
           attributes: ["skill"],
           // eslint-disable-next-line camelcase
-          through: { where: { id: [1, 2] } }
+          through: { where: { idSkills: array } }
         }
       ]
     }).then(function(result) {
-      res.json(result);
+      var barray = [];
+      for (var i = 0 ; i< result.length; i++){
+        if (result[i].Skills.length === array.length){
+          barray.push(result[i]);
+        }
+      }
+      res.json(barray);
     });
   });
 
   app.get("/api/Rtable/:idEmployee", function(req, res) {
     console.log(req.params.idEmployee);
+    var carray = []
     db.Rtable.findAll({
-      where: {
-        id: req.parms.idEmployee
-      }
+       where: { idEmployee: req.params.idEmployee } 
     }).then(function(result) {
-      res.json(result);
+      for(var i = 0; i < result.length; i++){
+        carray.push(result[i].idSkills)
+      }
+      res.json(carray);
     });
   });
   // Delete an example by id
