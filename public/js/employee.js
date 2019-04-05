@@ -65,7 +65,6 @@ $(document).ready(function () {
 
         // Now add all of our character data to the well we just placed on the page
         // make the name an h2,
-        $(".navbar-brand").append(data.userName);
         $("#character-well-" + 0).prepend(
           "<h1>User Name: <strong>" +
                 data.userName +
