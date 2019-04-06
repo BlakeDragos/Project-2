@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 $(document).ready(function () {
   var userName = sessionStorage.getItem("user");
+  $("#welcome").append(userName);
   var firstTime = sessionStorage.getItem("firstTime");
   var name;
   var contactInfo;
@@ -45,40 +46,41 @@ $(document).ready(function () {
   // make a get request to our api to grab every skill
   var getF = function () {
     var firstTime = sessionStorage.getItem("firstTime");
-    if(firstTime === "false"){ 
+    if(firstTime === "false"){
       $.get("/api/Employee/" + userName, function (data) {
       // for each skill that our server sends us back
         id = data.id;
         // create a parent div for the oncoming elements
-        var wellSection = $("#well-section");
+        var wellSection = $("#skillsDump");
         // add a class to this div: 'well'
         wellSection.addClass("well");
         // add an id to the well to mark which well it is
         wellSection.attr("id", "character-well-" + 0);
         // append the well to the well section
-        $("#well-section").append(wellSection);
+        $("#skillsDump").append(wellSection);
         userName = data.userName;
         name = data.name;
         jobTitle = data.jobTitle;
         contactInfo = data.contactInfo;
         bio = data.bio;
 
+        $("#character-well-" + 0).prepend(
+          "<li class = 'list-group-item'>Your Name: " +
+                data.userName + "</li>" +
+                "<li class = 'list-group-item'>Job Title: " +
+                data.jobTitle + "</li>"+
+                  "<li class = 'list-group-item'>Contact Info: " +
+                data.contactInfo + "</li>" +
+                  "<li class = 'list-group-item'> Bio: <p>" +
+                data.bio + "</p>" + "</li>"
+
+        );
+
+
         // Now add all of our character data to the well we just placed on the page
         // make the name an h2,
-        $(".navbar-brand").append(data.userName);
-        $("#character-well-" + 0).prepend(
-          "<h1>User Name: <strong>" +
-                data.userName +
-                "</strong></h1><h1>Your Name: <strong>" +
-                data.name +
-                "</strong></h1><h2>Job Title: <strong>" +
-                data.jobTitle +
-                "</strong></h2><h2>Contact Info:  <strong>" +
-                data.contactInfo +
-                "</strong><h2>Bio: </h2><p>" +
-                data.bio +
-                "</p>"
-        );
+    //    $(".navbar-brand").append(data.userName);
+
       }).then(function() {
         $.get("/api/Rtable/" + id, function (data) {
           fArray = data;
@@ -91,11 +93,19 @@ $(document).ready(function () {
               }
             }
             var SkillString = SkillsDysplay.join(", ");
-            $("#skillsDump").append(SkillString);
+
+            $("#character-well-" + 0).append(
+            "<li class = 'list-group-item'>Your Skills: " +
+                  SkillString + "</li>" );
           });
         });
       });
     }
+
+
+
+
+
   };
   getF();
   $(document).on("change", "#dropdown-jobs-list", function(){
@@ -124,7 +134,6 @@ $(document).ready(function () {
     };
     console.log(updateEmployee);
     //send an AJAX PUT-request with jQuery
-          
     //var sendData = $("#data").val();
     if(firstTime === "false") {
       $.ajax({
@@ -142,7 +151,7 @@ $(document).ready(function () {
         });
         if(RtableArray.length >= 1) {
           for(var t = 0; t< RtableArray.length; t++){
-            $.post("/api/Rtable", { 
+            $.post("/api/Rtable", {
               idEmployee: id,
               idSkills: RtableArray[t]
             }).then(function (response) {
@@ -167,7 +176,7 @@ $(document).ready(function () {
           });
           if(RtableArray.length >= 1) {
             for(var t = 0; t< RtableArray.length; t++){
-              $.post("/api/Rtable", { 
+              $.post("/api/Rtable", {
                 idEmployee: id,
                 idSkills: RtableArray[t]
               }).then(function (response) {

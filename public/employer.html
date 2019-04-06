@@ -22,7 +22,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">Welcome</a>
+            <a class="navbar-brand" id = "welcome"href="#">Welcome, </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -31,16 +31,38 @@
     </nav>
 
     <!-- Search for Employee button -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employee-search-modal">Search For
+
+
+<div class = "row">
+  <div class = "col-md-6">
+  <div class="card" style="width: 18rem; margin-top: 50px; margin-left: 150px; margin-right: 0px;">
+  <img class="card-img-top" src="img/em.jpg" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Welcome Employer!</h5>
+    <p class="card-text">You can search for employees by the skills. You can also add jobs and skills to the market! </p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employee-search-modal">Search For
         Employees</button>
+</li>
+    <li class="list-group-item"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employee-profile-modal">Add
+        Job</button></li>
+    <li class="list-group-item">  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employee-skill-modal">Add
+          Skill</button></li>
+  </ul>
+</div>
+</div>
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employee-profile-modal">Add
-        Job</button>
+<div class = "col-md-6">
+  <div class="card" style="width: 40rem; margin-top: 50px; margin-left:0px;">
+    <div class ="card-body" ><h5>Your Search Result</h5></div>
+      <ul class="list-group list-group-flush" id ="results">
+      </ul>
+</div>
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employee-skill-modal">Add
-        Skill</button>
+</div>
+</div>
 
-    <div id="results"></div>
 
     <!-- Search for employee modal -->
     <div class="modal fade" id="employee-search-modal" tabindex="-1" role="dialog"
@@ -155,7 +177,8 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-
+          var userName = sessionStorage.getItem("user");
+          $("#welcome").append(userName);
             function loop(arr) {
                 var skillarr = [];
                 for (var i = 0; i < arr.length; i++) {
@@ -196,19 +219,19 @@
                     console.log(response);
                     for (var i = 0; i < response.length; i++) {
                         $("#results").append(
-                            "<h1>User Name: <strong>" +
-                            response[i].userName +
-                            "</strong></h1><h1>Your Name: <strong>" +
-                            response[i].name +
-                            "</strong></h1><h2>Job Title: <strong>" +
-                            response[i].jobTitle +
-                            "</strong></h2><h2>Skills: <strong>" +
-                            loop(response[i].Skills) +
-                            "<h2>Contact Info:  <strong>" +
-                            response[i].contactInfo +
-                            "</strong><h2>Bio: </h2><p>" +
+                            "<li class = 'list-group-item'>Employee's Name:" +
+                            response[i].name + "</li>" +
+                            "<li class = 'list-group-item'>Job Title: " +
+                            response[i].jobTitle + "</li>"+
+                            "<li class = 'list-group-item'>Skills: " +
+                            loop(response[i].Skills) +"</li>"+
+                            "<li class = 'list-group-item'>Contact Info:" +
+                            response[i].contactInfo +"</li>"+
+                            "<li class = 'list-group-item'>Bio: <p>" +
                             response[i].bio +
-                            "</p>")
+                            "</p>" +
+                            "</li>"
+                            )
                     }
                 });
             });

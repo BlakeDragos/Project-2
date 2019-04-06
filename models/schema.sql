@@ -54,3 +54,6 @@ CREATE TABLE Jobs (
 );
 
 SELECT * FROM Employee;
+SELECT * FROM Login;
+SELECT * FROM Jobs;
+SELECT * FROM Skills;
