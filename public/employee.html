@@ -19,24 +19,49 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">Welcome, </a>
+            <a class="navbar-brand" id = "welcome" href="#">Welcome, </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
     </nav>
+
+
+
     <div class="container">
         <div class="row">
-            <div class="col">
-                <strong><h2>Skills: <span id="skillsDump"></span></h2></strong>
-                <div id="well-section">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal">
-                        Update Employee Info</button>
-                </div>
-            </div>
+          <div class = "col-md-6">
+          <div class="card" style="width: 30rem; margin-top: 50px; margin-left: 80px; margin-right: 10px;">
+          <img class="card-img-top" src="img/poor.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Welcome Employee!</h5>
+            <p class="card-text">You can upload and update your profile. Just wait quietly for jobs coming! </p>
+          </div>
+          <ul class="list-group list-group-flush" id="well-section" style= "align-items: center">
+            <li class="list-group-item">  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal">
+                  Update Employee Info</button>
+                </li>
+          </ul>
+         </div>
+
+              </div>
+
+        <div class = "col-md-6">
+
+          <div class="card" style="width: 40rem; margin-top: 50px; margin-left:0px;">
+            <div class ="card-body" ><h5>Your Profile</h5></div>
+              <ul class="list-group list-group-flush" id="skillsDump">
+              </ul>
+
+        </div>
         </div>
     </div>
+
+
+
+
+
     <!-- update modal -->
     <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
         aria-hidden="true">
@@ -102,4 +127,5 @@
     </div>
     <script type="text/javascript" src="js/employee.js"></script>
 </body>
+
 </html>
