@@ -64,23 +64,23 @@ $(document).ready(function () {
         contactInfo = data.contactInfo;
         bio = data.bio;
 
+        $("#character-well-" + 0).prepend(
+          "<li class = 'list-group-item'>Your Name: " +
+                data.userName + "</li>" +
+                "<li class = 'list-group-item'>Job Title: " +
+                data.jobTitle + "</li>"+
+                  "<li class = 'list-group-item'>Contact Info: " +
+                data.contactInfo + "</li>" +
+                  "<li class = 'list-group-item'> Bio: <p>" +
+                data.bio + "</p>" + "</li>"
+
+        );
 
 
         // Now add all of our character data to the well we just placed on the page
         // make the name an h2,
     //    $(".navbar-brand").append(data.userName);
 
-        $("#character-well-" + 0).prepend(
-          "<li class = 'list-group-item'>Your Name:" +
-                data.userName + "</li>" +
-                "<li class = 'list-group-item'>Job Title: " +
-                data.jobTitle + "</li>"+
-                  "<li class = 'list-group-item'>Contact Info:" +
-                data.contactInfo + "</li>" +
-                  "<li class = 'list-group-item'> Bio: <p>" +
-                data.bio +
-                "</p>" + "</li>"
-        );
       }).then(function() {
         $.get("/api/Rtable/" + id, function (data) {
           fArray = data;
@@ -93,11 +93,19 @@ $(document).ready(function () {
               }
             }
             var SkillString = SkillsDysplay.join(", ");
-            $("#skillsDump").append(SkillString);
+
+            $("#character-well-" + 0).append(
+            "<li class = 'list-group-item'>Your Skills: " +
+                  SkillString + "</li>" );
           });
         });
       });
     }
+
+
+
+
+
   };
   getF();
   $(document).on("change", "#dropdown-jobs-list", function(){
