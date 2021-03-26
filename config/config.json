@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "Filbert_8",
+    "password": "",
     "database": "JobSiteDB",
     "host": "localhost",
     "dialect": "mysql"
